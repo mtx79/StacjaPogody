@@ -2,14 +2,26 @@
 #include <dht11.h>
 dht11 DHT11;
 #define DHT11PIN 2
+#define BUTTON 3
 
 LiquidCrystal lcd(4,5,6,7,8,9);
 
 void setup()
 {
+	pinMode(BUTTON, INPUT);
   lcd.begin(16, 2);
   lcd.clear();
   }
+
+
+void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
+{
+	if (digitalRead(BUTTON) == HIGH)
+	{
+												//dostep do historii
+	}
+}
+
 
 void loop()
 {
