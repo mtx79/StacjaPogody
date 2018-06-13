@@ -1,37 +1,35 @@
 #include<LiquidCrystal.h>
 #include<dht11.h>
 #include<SD.h>
-dht11 DHT11;
+
 #define DHT11PIN 2
 #define BUTTON 3
 #define KARTA 10
 #define status_karty 8
+#define czestotliwosc_zapisu 1
 
 LiquidCrystal lcd(4,5,6,7,8,9);
-
+dht11 DHT11;
 float temperatura, wilgotnosc;
-int zapisWar=0;
+int zapisWar=1;
+int tempArray[30];
+int humArray[30];
 
 void setup()
 {
-  lcd.begin(16, 2);
+  lcd.begin(20, 4);
   lcd.clear();
-  Serial.begin(9600);
-  Serial.print("inicjalizacja karty SD...");
   pinMode(KARTA, OUTPUT);
-  if(!SD.begin(status_karty))
-  {
-    Serial.println("Brak lub nieprawidlowe dzialanie karty");
+  if(!SD.begin(status_karty)){
     lcd.print("Brak karty");
     delay(5000);
-    return;
   }
-  Serial.println("Karta SD gotowa do uzycia.");
-  lcd.print("Karta SD - OK");
-  delay(5000);
-
-  
+  else{
+    lcd.print("Karta OK");
+    delay(5000);
+  }
 	pinMode(BUTTON, INPUT);
+  //attachInterrupt(1, ekran2, RISING);
 
 }
 
@@ -39,21 +37,8 @@ void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
 {
   pobierz_dane_z_czujnika();
 	ekran1();
-	if(zapisWar==12)
-	{
-    zapisWar=0;
-		zapisz();
-	}
-	zapisWar++;
-	for(int i=0; i<1000; ++i)
-	{
-    delay(5);
-		if (digitalRead(BUTTON) == HIGH)
-		{
-			ekran2();							//dostep do historii
-      break;
-		}
-	}
+	zapisz(czestotliwosc_zapisu);
+  sprawdz_przycisk();
 }
 
 

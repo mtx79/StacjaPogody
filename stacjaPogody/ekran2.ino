@@ -1,12 +1,17 @@
+
 void ekran2()
 {
+  int a=0;
 	lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("To dziala!");
-  lcd.setCursor(0, 1);
-  for(int i=0; i<=9; i++)
-  {
-    lcd.print(i);
-    delay(1000);
+  for(int i = 0; i<4; ++i){
+    lcd.setCursor(0, i);
+    lcd.print("p");
+    lcd.print(i+a);
+    lcd.print("   T: ");
+    lcd.print(tempArray[i+a]);
+    lcd.print("   W: ");
+    lcd.print(humArray[i+a]);
   }
+
+  delay(5000);
 }
