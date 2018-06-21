@@ -1,9 +1,7 @@
-void sprawdz_przycisk(){	
-	for(int i=0; i<1000; ++i){
+bool sprawdz_przycisk(int a){	
+	for(int i=0; i<(a*200); ++i){
     delay(5);
-		if (digitalRead(BUTTON) == HIGH){
-			ekran2();							//dostep do historii
-      break;
-		}
+		if (digitalRead(BUTTON) == HIGH){return true;}
 	}
+ return false;
 }

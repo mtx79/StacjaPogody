@@ -1,15 +1,24 @@
-void zapisz(int a)
-{
+bool zapisz(int a){
+  if(stanZapisu==false){
+   if(!SD.begin(SS))
+    return false;
+  }
+  else
+    stanZapisu=true;
+    
+  ++zapisWar;
   if(zapisWar==a){
   	File dataFile = SD.open("DATA.TXT", FILE_WRITE);
     if (dataFile){
+      Serial.print("Zapis przed close: datafile = ");
+      Serial.println(dataFile);
       dataFile.print("\nwilgotnosc: ");
       dataFile.print((float)wilgotnosc, 2);
       dataFile.print("\ntemperatura: ");
       dataFile.print((float)temperatura, 2);
       dataFile.close();
-      lcd.setCursor(18,4);
-      lcd.print("OK");
+      Serial.print("Zapis po close: datafile = ");
+      Serial.println(dataFile);
 
       for(int i=29; i>0; --i){               //
         tempArray[i] = tempArray[i-1];
@@ -17,12 +26,12 @@ void zapisz(int a)
       }
       tempArray[0] = temperatura;
       humArray[0] = wilgotnosc;
+      zapisWar=0;
+      return true;
     }
-    else{
-      lcd.setCursor(5, 4);
-      lcd.print("Zapis nieudany!");
-    }
-    zapisWar=0;
+    else
+      return false;
   }
-  ++zapisWar;
+  else
+    return stanZapisu;
 }
