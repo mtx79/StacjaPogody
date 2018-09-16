@@ -10,15 +10,27 @@ bool zapisz(int a){
   if(zapisWar==a){
   	File dataFile = SD.open("DATA.TXT", FILE_WRITE);
     if (dataFile){
-      Serial.print("Zapis przed close: datafile = ");
-      Serial.println(dataFile);
-      dataFile.print("\nwilgotnosc: ");
+      DateTime now = rtc.now();
+      dataFile.print("\n");
+      dataFile.print(now.year(), DEC);
+      dataFile.print('/');
+      dataFile.print(now.month(), DEC);
+      dataFile.print('/');
+      dataFile.print(now.day(), DEC);
+      dataFile.print("  ");
+      dataFile.print(now.hour(), DEC);
+      dataFile.print(':');
+      dataFile.print(now.minute(), DEC);
+      dataFile.print(':');
+      dataFile.print(now.second(), DEC);
+
+      dataFile.print("   ");  
+      dataFile.print("wilgotnosc: ");
       dataFile.print((float)wilgotnosc, 2);
-      dataFile.print("\ntemperatura: ");
+      dataFile.print("   ");
+      dataFile.print("temperatura: ");
       dataFile.print((float)temperatura, 2);
       dataFile.close();
-      Serial.print("Zapis po close: datafile = ");
-      Serial.println(dataFile);
 
       for(int i=29; i>0; --i){               //
         tempArray[i] = tempArray[i-1];

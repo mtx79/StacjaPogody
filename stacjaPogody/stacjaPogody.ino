@@ -1,11 +1,17 @@
 #include<LiquidCrystal.h>
 #include<dht11.h>
-//#include<SPI.h>
+#include<SPI.h>
 #include<SD.h>
-#include<time.h>
+#include<Wire.h>
+#include "RTClib.h"
+
+RTC_DS1307 rtc;
+
 
 #define DHT11PIN 2
 #define BUTTON 3
+#define BUTTON_UP 0
+#define BUTTON_DOWN 1
 #define SS 10
 #define czestotliwosc_zapisu 1
 #define ilosc_zapisow 30
@@ -17,18 +23,6 @@ int zapisWar=0;
 int tempArray[ilosc_zapisow];
 int humArray[ilosc_zapisow];
 bool stanZapisu=true;
-typedef struct czas{
-  int godzina;
-  int minuta;
-  int sekunda;
-  void pobierz_czas(){
-    unsigned long temp = millis();
-    godzina = (temp/100/60/60);
-    minuta = (temp/1000/60) - (godzina*60);
-    sekunda = (temp/1000)-(minuta*60);
-  }
-}czas;
-czas _czas[ilosc_zapisow];
 
 
 void setup()
@@ -42,19 +36,24 @@ void setup()
   else
     stanZapisu=true;
 	pinMode(BUTTON, INPUT);
+//  pinMode(BUTTON_UP, INPUT);
+//  pinMode(BUTTON_DOWN, INPUT);
   //attachInterrupt(1, ekran2, RISING);
-
+  rtc.begin();
+  rtc.isrunning();
+  //rtc.adjust(DateTime(2018, 9, 15, 10, 13, 0));
 }
 
 void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
 {
   pobierz_dane_z_czujnika();
   stanZapisu=zapisz(czestotliwosc_zapisu);
-  Serial.print("StanZapisu = ");
-  Serial.println(stanZapisu);
+
 	ekran1();
-  if(sprawdz_przycisk(1))
+  if(sprawdz_przycisk(1)){
     ekran2();
+    delay(500);
+  }
 }
 
 

@@ -1,13 +1,24 @@
 void ekran1()
 {
   lcd.clear();
-  lcd.setCursor(5, 0);
-  _czas[0].pobierz_czas();
-  lcd.print(_czas[0].godzina);
-  lcd.print("-");
-  lcd.print(_czas[0].minuta);
-  lcd.print("-");
-  lcd.print(_czas[0].sekunda);
+  lcd.setCursor(12, 0);
+
+    DateTime now = rtc.now();
+    lcd.print(now.hour(), DEC);
+    lcd.print(':');
+    lcd.print(now.minute(), DEC);
+    lcd.print(':');
+    lcd.print(now.second(), DEC);
+
+    lcd.setCursor(0, 0);
+    lcd.print(now.year(), DEC);
+    lcd.print('/');
+    lcd.print(now.month(), DEC);
+    lcd.print('/');
+    lcd.print(now.day(), DEC);
+    
+
+
 
   lcd.setCursor(0, 1);
   lcd.print("Wilg. (%): ");              //wyświetlenie wartości wilgotności
