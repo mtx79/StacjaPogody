@@ -10,8 +10,8 @@ RTC_DS1307 rtc;
 
 #define DHT11PIN 2
 #define BUTTON 3
-#define BUTTON_UP 0
-#define BUTTON_DOWN 1
+#define BUTTON_UP 1
+#define BUTTON_DOWN 2
 #define SS 10
 #define czestotliwosc_zapisu 1
 #define ilosc_zapisow 30
@@ -27,7 +27,6 @@ bool stanZapisu=true;
 
 void setup()
 {
-  Serial.begin(9600);
   lcd.begin(20, 4);
   lcd.clear();
   pinMode(SS, OUTPUT);
@@ -36,9 +35,6 @@ void setup()
   else
     stanZapisu=true;
 	pinMode(BUTTON, INPUT);
-//  pinMode(BUTTON_UP, INPUT);
-//  pinMode(BUTTON_DOWN, INPUT);
-  //attachInterrupt(1, ekran2, RISING);
   rtc.begin();
   rtc.isrunning();
   //rtc.adjust(DateTime(2018, 9, 15, 10, 13, 0));
