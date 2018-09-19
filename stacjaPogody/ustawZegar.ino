@@ -1,5 +1,5 @@
 void ustawZegar(){
-  int tab[12]={2,0,1,8,0,9,1,9,0,9,2,6};
+  int tab[12]={2,0,1,8,0,9,1,9,0,9,0,0};
   int a = 0;
   int j = 0;
   int rok = 2018;
@@ -66,7 +66,7 @@ void ustawZegar(){
       delay(20);
     }
 
-    if (analogRead(BUTTON_UP) > 10 && tab[a]<9){
+    if (analogRead(BUTTON_UP) > 100 && tab[a]<9){
       delay(20);
       ++tab[a];
       lcd.clear();
@@ -89,11 +89,11 @@ void ustawZegar(){
       lcd.print(tab[11]);
       lcd.setCursor(j, 1);
       lcd.print("-");
-      while(analogRead(BUTTON_UP) > 10);
+      while(analogRead(BUTTON_UP) > 100);
       delay(20);
     }
 
-    if (analogRead(BUTTON_DOWN) > 10 && tab[a]>0){
+    if (analogRead(BUTTON_DOWN) > 100 && tab[a]>0){
       delay(20);
       --tab[a];
       lcd.clear();
@@ -116,7 +116,7 @@ void ustawZegar(){
       lcd.print(tab[11]);
       lcd.setCursor(j, 1);
       lcd.print("-");
-      while(analogRead(BUTTON_DOWN) > 10);
+      while(analogRead(BUTTON_DOWN) > 100);
       delay(20);
     }
   }

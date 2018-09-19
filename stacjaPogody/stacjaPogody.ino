@@ -43,6 +43,9 @@ void setup()
 
 void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
 {
+  Serial.println(analogRead(BUTTON_UP));
+  Serial.println(analogRead(BUTTON_DOWN));
+  Serial.println(" ");
   pobierz_dane_z_czujnika();
   stanZapisu=zapisz(czestotliwosc_zapisu);
 	ekran1();

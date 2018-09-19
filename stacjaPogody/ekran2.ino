@@ -17,7 +17,7 @@ void ekran2()
   delay(20);
   
   do{
-    if (analogRead(BUTTON_UP) > 10 && a<27){
+    if (analogRead(BUTTON_UP) > 100 && a<27){
       delay(20);
       ++a;
       lcd.clear();
@@ -30,12 +30,12 @@ void ekran2()
         lcd.print("   W: ");
         lcd.print(humArray[i+a]);
       }
-      while(analogRead(BUTTON_UP) > 10);
+      while(analogRead(BUTTON_UP) > 100);
       delay(20);
     }
 
 
-    if (analogRead(BUTTON_DOWN) > 10 && a>0){
+    if (analogRead(BUTTON_DOWN) > 100 && a>0){
       delay(20);
       --a;
       lcd.clear();
@@ -48,7 +48,7 @@ void ekran2()
         lcd.print("   W: ");
         lcd.print(humArray[i+a]);
       }
-      while(analogRead(BUTTON_DOWN) > 10);
+      while(analogRead(BUTTON_DOWN) > 100);
       delay(20);
     }
   }while(digitalRead(BUTTON) != HIGH);
