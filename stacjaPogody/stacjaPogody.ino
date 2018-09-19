@@ -27,6 +27,7 @@ bool stanZapisu=true;
 
 void setup()
 {
+  Serial.begin(9600);
   lcd.begin(20, 4);
   lcd.clear();
   pinMode(SS, OUTPUT);
@@ -44,12 +45,8 @@ void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
 {
   pobierz_dane_z_czujnika();
   stanZapisu=zapisz(czestotliwosc_zapisu);
-
 	ekran1();
-  if(sprawdz_przycisk(1)){
-    ekran2();
-    delay(500);
-  }
+  sprawdz_przycisk(1);
 }
 
 

@@ -1,10 +1,10 @@
 bool zapisz(int a){
-  if(stanZapisu==false){
-   if(!SD.begin(SS))
-    return false;
-  }
-  else
-    stanZapisu=true;
+//  if(stanZapisu==false){
+//   if(!SD.begin(SS))
+//    return false;
+//  }
+//  else
+//    stanZapisu=true;
     
   ++zapisWar;
   if(zapisWar==a){
