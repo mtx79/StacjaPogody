@@ -1,5 +1,10 @@
-void pobierz_dane_z_czujnika(){
-  int chk = DHT11.read(DHT11PIN);         //sprawdzenie stanu sensora, a następnie wyświetlenie komunikatu na monitorze szeregowym
+void pobierz_dane_z_czujnika(const long interval){
+
+  unsigned long currentMillis = millis();
+  unsigned long czas = currentMillis-startMillisCzujnik;
+  if(czas >= interval){
+    startMillisCzujnik = currentMillis;
+    int chk = DHT11.read(DHT11PIN);         //sprawdzenie stanu sensora, a następnie wyświetlenie komunikatu na monitorze szeregowym
 
     switch (chk){
       case DHTLIB_OK: 
@@ -28,4 +33,5 @@ void pobierz_dane_z_czujnika(){
       delay(5000);
       break;
     }
+  }
 }

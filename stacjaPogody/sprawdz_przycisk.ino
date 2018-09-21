@@ -1,9 +1,8 @@
-void sprawdz_przycisk(int a){
+void sprawdz_przycisk(){
   unsigned long start=0;
   unsigned long koniec=0;	
   unsigned long czas=0;
-	for(int i=0; i<=(a*200); ++i){  
-    delay(5);
+
 		if (digitalRead(BUTTON) == HIGH){
       delay(20);
       start = millis();
@@ -21,5 +20,4 @@ void sprawdz_przycisk(int a){
       else
         ustawZegar();
 		}
-	}
 }

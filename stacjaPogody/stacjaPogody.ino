@@ -1,9 +1,9 @@
-#include<LiquidCrystal.h>
-#include<dht11.h>
-#include<SPI.h>
-#include<SD.h>
-#include<Wire.h>
-#include "RTClib.h"
+#include<LiquidCrystal.h> //biblioteka wyswietlacza
+#include<dht11.h>         //biblioteka do czujnika tamp i wilgotnosci
+#include<SPI.h>           //biblioteka do obslugi magistrali SPI (podlaczona karta SD)
+#include<SD.h>            //biblioteka do obslugi karty SD
+//#include<Wire.h>          
+#include "RTClib.h"       //biblioteka do obslugi zegara czasu rzeczywistego
 
 RTC_DS1307 rtc;
 
@@ -13,17 +13,23 @@ RTC_DS1307 rtc;
 #define BUTTON_UP 1
 #define BUTTON_DOWN 2
 #define SS 10
-#define czestotliwosc_zapisu 1
+#define intervalZapisu 60000
+#define intervalCzujnik 5000
+#define intervalEkran 1000
 #define ilosc_zapisow 30
+
+
 
 LiquidCrystal lcd(4,5,6,7,8,9);
 dht11 DHT11;
 float temperatura, wilgotnosc;
-int zapisWar=0;
 int tempArray[ilosc_zapisow];
 int humArray[ilosc_zapisow];
 bool stanZapisu=true;
-
+File dataFile;
+unsigned long startMillisZapis = 0;
+unsigned long startMillisCzujnik = 0;
+unsigned long startMillisEkran = 0;
 
 void setup()
 {
@@ -43,13 +49,13 @@ void setup()
 
 void loop()	//oddzielenie przyciskow od obslugi wyswietlacza
 {
-  Serial.println(analogRead(BUTTON_UP));
-  Serial.println(analogRead(BUTTON_DOWN));
-  Serial.println(" ");
-  pobierz_dane_z_czujnika();
-  stanZapisu=zapisz(czestotliwosc_zapisu);
-	ekran1();
-  sprawdz_przycisk(1);
+  //Serial.println(analogRead(BUTTON_UP));
+  //Serial.println(analogRead(BUTTON_DOWN));
+  //Serial.println(" ");
+  pobierz_dane_z_czujnika(intervalCzujnik);
+  stanZapisu = zapisz(intervalZapisu);
+	ekran1(intervalEkran);
+  sprawdz_przycisk();
 }
 
 

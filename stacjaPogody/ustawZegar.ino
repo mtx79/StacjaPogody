@@ -34,7 +34,7 @@ void ustawZegar(){
   
   while(a<12){
     if (digitalRead(BUTTON) == HIGH){
-      delay(20);
+      delay(30);
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(tab[0]);
@@ -63,11 +63,11 @@ void ustawZegar(){
       lcd.setCursor(j, 1);
       lcd.print("-");
       while(digitalRead(BUTTON) == HIGH);
-      delay(20);
+      delay(30);
     }
 
-    if (analogRead(BUTTON_UP) > 100 && tab[a]<9){
-      delay(20);
+    if (analogRead(BUTTON_UP) > 1000 && tab[a]<9){
+      delay(30);
       ++tab[a];
       lcd.clear();
       lcd.setCursor(0, 0);
@@ -89,12 +89,12 @@ void ustawZegar(){
       lcd.print(tab[11]);
       lcd.setCursor(j, 1);
       lcd.print("-");
-      while(analogRead(BUTTON_UP) > 100);
-      delay(20);
+      while(analogRead(BUTTON_UP) > 1000);
+      delay(30);
     }
 
-    if (analogRead(BUTTON_DOWN) > 100 && tab[a]>0){
-      delay(20);
+    if (analogRead(BUTTON_DOWN) > 1000 && tab[a]>0){
+      delay(30);
       --tab[a];
       lcd.clear();
       lcd.setCursor(0, 0);
@@ -116,8 +116,8 @@ void ustawZegar(){
       lcd.print(tab[11]);
       lcd.setCursor(j, 1);
       lcd.print("-");
-      while(analogRead(BUTTON_DOWN) > 100);
-      delay(20);
+      while(analogRead(BUTTON_DOWN) > 1000);
+      delay(30);
     }
   }
 

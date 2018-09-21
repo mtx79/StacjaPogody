@@ -1,14 +1,13 @@
-bool zapisz(int a){
-//  if(stanZapisu==false){
-//   if(!SD.begin(SS))
-//    return false;
-//  }
-//  else
-//    stanZapisu=true;
+bool zapisz(const long interval){
+
+unsigned long currentMillis = millis();
+unsigned long czas = currentMillis-startMillisZapis;
+  if(czas >= interval){
+    startMillisZapis = currentMillis;
     
-  ++zapisWar;
-  if(zapisWar==a){
-  	File dataFile = SD.open("DATA.TXT", FILE_WRITE);
+  	dataFile = SD.open("DATA.TXT", FILE_WRITE);
+    Serial.print("dataFile po probie otwarcia: ");
+    Serial.println(dataFile);
     if (dataFile){
       DateTime now = rtc.now();
       dataFile.print("\n");
@@ -38,7 +37,6 @@ bool zapisz(int a){
       }
       tempArray[0] = temperatura;
       humArray[0] = wilgotnosc;
-      zapisWar=0;
       return true;
     }
     else

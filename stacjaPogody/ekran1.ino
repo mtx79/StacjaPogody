@@ -1,6 +1,16 @@
-void ekran1()
+void ekran1(const long interval)
 {
-  lcd.clear();
+  unsigned long currentMillis = millis();
+  unsigned long czas = currentMillis - startMillisEkran;
+  //Serial.print("Ekran interval: ");
+  //Serial.println(interval);
+  //Serial.print("Ekran czas: ");
+  //Serial.println(czas);
+  //Serial.println("");
+  
+  if(czas >= interval){
+    startMillisEkran = currentMillis;
+    lcd.clear();
 
     DateTime now = rtc.now();
     int rok = now.year();
@@ -69,18 +79,19 @@ void ekran1()
 */
 
 
-  lcd.setCursor(0, 1);
-  lcd.print("Wilg. (%): ");              //wyświetlenie wartości wilgotności
-  lcd.print(wilgotnosc, 1);
-  lcd.setCursor(0, 2);
-  lcd.print("Temp. (C): ");           //wyświetlenie temperatury
-  lcd.print(temperatura, 1);
-  if(stanZapisu==true){
-    lcd.setCursor(18, 3);
-    lcd.print("OK");
-  }
-  else{
-    lcd.setCursor(6, 3);
-    lcd.print("Blad karty");
+    lcd.setCursor(0, 1);
+    lcd.print("Wilg. (%): ");              //wyświetlenie wartości wilgotności
+    lcd.print(wilgotnosc, 1);
+    lcd.setCursor(0, 2);
+    lcd.print("Temp. (C): ");           //wyświetlenie temperatury
+    lcd.print(temperatura, 1);
+    if(stanZapisu==true){
+      lcd.setCursor(18, 3);
+      lcd.print("OK");
+    }
+    else{
+      lcd.setCursor(6, 3);
+      lcd.print("Blad karty");
+    }
   }
 }
