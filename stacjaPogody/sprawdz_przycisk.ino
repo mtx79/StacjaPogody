@@ -4,7 +4,7 @@ void sprawdz_przycisk(){
   unsigned long czas=0;
 
 		if (digitalRead(BUTTON) == HIGH){
-      delay(20);
+      delay(30);
       start = millis();
       while(digitalRead(BUTTON) == HIGH && (czas < 3000)){    //mierze jak długo przycisk jest wcisniety
         koniec = millis();
@@ -20,4 +20,9 @@ void sprawdz_przycisk(){
       else
         ustawZegar();
 		}
+   if (analogRead(BUTTON_UP) > 1000){
+    delay(30);
+    ustawCzasZapisu();
+    while(digitalRead(BUTTON) == HIGH);
+   }
 }

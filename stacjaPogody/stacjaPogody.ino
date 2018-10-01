@@ -14,7 +14,7 @@ RTC_DS1307 rtc;
 #define BUTTON_UP 1
 #define BUTTON_DOWN 2
 #define SS 10
-#define intervalZapisu 3600000
+//#define intervalZapisu 3600000
 #define intervalCzujnik 5000
 #define intervalEkran 1000
 
@@ -29,6 +29,7 @@ File dataFile;
 unsigned long startMillisZapis = 0;
 unsigned long startMillisCzujnik = 0;
 unsigned long startMillisEkran = 0;
+unsigned long intervalZapisu = 3600000;
 
 void setup()
 {

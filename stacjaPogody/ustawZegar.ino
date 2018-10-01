@@ -1,12 +1,28 @@
 void ustawZegar(){
-  int tab[12]={2,0,1,8,0,9,1,9,0,9,0,0};
+  int tab[12];
   int a = 0;
   int j = 0;
-  int rok = 2018;
-  int miesiac = 9;
-  int dzien = 19;
-  int godzina = 9;
-  int minuta = 0;
+  DateTime now = rtc.now();
+  
+  int rok = now.year();
+  int miesiac = now.month();
+  int dzien = now.day();
+  int godzina = now.hour();
+  int minuta = now.minute();
+
+  tab[0] = rok/1000;
+  tab[1] = (rok-(tab[0]*1000))/100;
+  tab[2] = (rok - (tab[0]*1000) - (tab[1]*100))/10;
+  tab[3] = (rok - (tab[0]*1000) - (tab[1]*100) - (tab[2]*10));
+  tab[4] = miesiac/10;
+  tab[5] = miesiac - (tab[4]*10);
+  tab[6] = dzien/10;
+  tab[7] = dzien - (tab[6]*10);
+  tab[8] = godzina/10;
+  tab[9] = godzina - (tab[8]*10);
+  tab[10] = minuta/10;
+  tab[11] = minuta - (tab[10]*10);
+
 
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -24,8 +40,8 @@ void ustawZegar(){
   lcd.print(tab[8]);
   lcd.print(tab[9]);
   lcd.print(":");
-  lcd.print(tab[1]);
-  lcd.print(tab[1]);
+  lcd.print(tab[10]);
+  lcd.print(tab[11]);
   lcd.setCursor(j, 1);
   lcd.print("-");
     
